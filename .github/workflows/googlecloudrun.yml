@@ -1,8 +1,8 @@
 name: Deploy the application to Google Cloud Run
 on:
   push:
-    branches:
-      - 'master'
+    tags:
+      - 'v[0-9]+(\.[0-9]+){0,2}$'
 
 jobs:
   deploy:
@@ -14,7 +14,7 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build . --tag eu.gcr.io/${{ secrets.GCLOUD_PROJECT }}/${{ secrets.GCLOUD_APP_NAME }}:v0.3.0 --tag eu.gcr.io/${{ secrets.GCLOUD_PROJECT }}/${{ secrets.GCLOUD_APP_NAME }}:latest
+          docker build . --tag eu.gcr.io/${{ secrets.GCLOUD_PROJECT }}/${{ secrets.GCLOUD_APP_NAME }}:${{ github.ref }} --tag eu.gcr.io/${{ secrets.GCLOUD_PROJECT }}/${{ secrets.GCLOUD_APP_NAME }}:latest
 
       - name: Authenticate into Google Cloud Platform
         uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
