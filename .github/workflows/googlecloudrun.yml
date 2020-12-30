@@ -2,7 +2,7 @@ name: Deploy the application to Google Cloud Run
 on:
   push:
     tags:
-      - 'v[0-9]+(\.[0-9]+){0,2}$'
+      - 'v*'
 
 jobs:
   deploy:
