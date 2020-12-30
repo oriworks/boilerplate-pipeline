@@ -24,6 +24,9 @@ jobs:
 
       - name: Configure Docker to use Google Cloud Platform
         run: "gcloud auth configure-docker --quiet"
+      
+      - name: Push help
+        run: docker image push --help
 
       - name: Push image to Google Cloud Container Registry
         run: docker image push --all-tags eu.gcr.io/${{ secrets.GCLOUD_PROJECT }}/${{ secrets.GCLOUD_APP_NAME }}
